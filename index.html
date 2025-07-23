@@ -8,29 +8,23 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap');
-        body {
-            font-family: 'Tajawal', sans-serif;
-        }
-        .question-type-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-        .code-block {
-            position: relative;
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
+
+        html[lang="ar"] body { font-family: 'Tajawal', sans-serif; }
+        html[lang="en"] body { font-family: 'Roboto', sans-serif; }
+
+        .code-block { position: relative; }
         .copy-btn {
             position: absolute;
             top: 8px;
-            left: 8px;
             opacity: 0;
             transition: opacity 0.3s;
         }
-        .code-block:hover .copy-btn {
-            opacity: 1;
-        }
-        .nav-item {
-            position: relative;
-        }
+        html[dir="rtl"] .copy-btn { left: 8px; }
+        html[dir="ltr"] .copy-btn { right: 8px; }
+        .code-block:hover .copy-btn { opacity: 1; }
+
+        .nav-item { position: relative; }
         .nav-item::after {
             content: '';
             position: absolute;
@@ -41,12 +35,21 @@
             background-color: #3b82f6;
             transition: width 0.3s;
         }
-        .nav-item.active::after, .nav-item:hover::after {
-            width: 100%;
-        }
-        [dir="rtl"] .rotate-180 {
-            transform: rotate(180deg);
-        }
+        .nav-item.active::after, .nav-item:hover::after { width: 100%; }
+
+        [dir="rtl"] .rotate-180 { transform: rotate(180deg); }
+        
+        /* LTR specific styles */
+        html[dir="ltr"] .mr-3 { margin-right: 0; margin-left: 0.75rem; }
+        html[dir="ltr"] .ml-3 { margin-left: 0; margin-right: 0.75rem; }
+        html[dir="ltr"] .mr-2 { margin-right: 0; margin-left: 0.5rem; }
+        html[dir="ltr"] .mr-4 { margin-right: 0; margin-left: 1rem; }
+        html[dir="ltr"] .space-x-1 > :not([hidden]) ~ :not([hidden]) { margin-right: 0; margin-left: 0.25rem; }
+        html[dir="ltr"] .space-x-4 > :not([hidden]) ~ :not([hidden]) { margin-right: 0; margin-left: 1rem; }
+        html[dir="ltr"] .space-x-6 > :not([hidden]) ~ :not([hidden]) { margin-right: 0; margin-left: 1.5rem; }
+        html[dir="ltr"] .border-l-4 { border-left-width: 0; border-right-width: 4px; }
+        html[dir="ltr"] .pl-4 { padding-left: 0; padding-right: 1rem; }
+        html[dir="ltr"] .list-disc { padding-right: 1rem; }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
@@ -57,13 +60,19 @@
                 <div class="flex items-center mb-4 md:mb-0">
                     <i class="fas fa-brain text-3xl mr-3"></i>
                     <div>
-                        <h1 class="text-2xl md:text-3xl font-bold">محول الأسئلة الذكي</h1>
-                        <p class="text-blue-200">أداة تحويل الأسئلة إلى تنسيق JSON معياري</p>
+                        <h1 class="text-2xl md:text-3xl font-bold" data-translate-key="main_title">محول الأسئلة الذكي</h1>
+                        <p class="text-blue-200" data-translate-key="main_subtitle">أداة تحويل الأسئلة إلى تنسيق JSON معياري</p>
                     </div>
                 </div>
-                <div class="bg-white/10 rounded-lg px-4 py-2">
-                    <p class="font-medium">الإصدار: 3.0</p>
-                    <p class="text-sm text-blue-200">تاريخ الإصدار: 23 يوليو 2025</p>
+                <div class="flex items-center space-x-4">
+                     <button id="translate-btn" class="bg-white/20 hover:bg-white/30 text-white font-bold py-2 px-4 rounded-lg flex items-center transition-colors">
+                        <i class="fas fa-language mr-2"></i>
+                        <span data-translate-key="translate_btn">English</span>
+                    </button>
+                    <div class="bg-white/10 rounded-lg px-4 py-2 text-center">
+                        <p class="font-medium" data-translate-key="version">الإصدار: 3.0</p>
+                        <p class="text-sm text-blue-200" data-translate-key="release_date">23 يوليو 2025</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -75,27 +84,27 @@
         <section id="introduction" class="mb-12 bg-white rounded-xl shadow-md overflow-hidden">
             <div class="bg-gradient-to-r from-blue-500 to-blue-700 p-6 text-white">
                 <h2 class="text-2xl font-bold flex items-center">
-                    <i class="fas fa-info-circle mr-3"></i> مقدمة
+                    <i class="fas fa-info-circle mr-3"></i><span data-translate-key="intro_title">مقدمة</span>
                 </h2>
             </div>
             <div class="p-6">
-                <p class="mb-4 text-lg leading-relaxed">
+                <p class="mb-4 text-lg leading-relaxed" data-translate-key="intro_p1">
                     يهدف تطبيق "محول الأسئلة الذكي" إلى تحويل نصوص الأسئلة المكتوبة بصيغ محددة إلى تنسيق JSON معياري ومتقدم، مما يسهل عملية أرشفة الأسئلة واستخدامها في الأنظمة التعليمية الرقمية.
                 </p>
                 <div class="grid md:grid-cols-2 gap-6 mt-6">
                     <div class="bg-blue-50 border border-blue-100 rounded-lg p-4">
                         <h3 class="font-bold text-blue-800 mb-2 flex items-center">
-                            <i class="fas fa-microchip mr-2"></i> التحليل الذكي (المحلي)
+                            <i class="fas fa-microchip mr-2"></i><span data-translate-key="intro_local_title">التحليل الذكي (المحلي)</span>
                         </h3>
-                        <p class="text-blue-900">
+                        <p class="text-blue-900" data-translate-key="intro_local_desc">
                             تحليل سريع ومباشر يعتمد على قواعد وتنسيقات محددة مسبقًا لكل نوع سؤال، يضمن نتائج دقيقة بدون اتصال بالإنترنت.
                         </p>
                     </div>
                     <div class="bg-purple-50 border border-purple-100 rounded-lg p-4">
                         <h3 class="font-bold text-purple-800 mb-2 flex items-center">
-                            <i class="fas fa-robot mr-2"></i> التحسين بالذكاء الاصطناعي (اختياري)
+                            <i class="fas fa-robot mr-2"></i><span data-translate-key="intro_ai_title">التحسين بالذكاء الاصطناعي (اختياري)</span>
                         </h3>
-                        <p class="text-purple-900">
+                        <p class="text-purple-900" data-translate-key="intro_ai_desc">
                             استخدام واجهة برمجة تطبيقات Gemini AI لمراجعة وتحسين دقة التحليل الأولي عند الحاجة لمزيد من الدقة.
                         </p>
                     </div>
@@ -107,47 +116,41 @@
         <section id="rules" class="mb-12 bg-white rounded-xl shadow-md overflow-hidden">
             <div class="bg-gradient-to-r from-green-500 to-green-700 p-6 text-white">
                 <h2 class="text-2xl font-bold flex items-center">
-                    <i class="fas fa-clipboard-list mr-3"></i> القواعد العامة للإدخال
+                    <i class="fas fa-clipboard-list mr-3"></i><span data-translate-key="rules_title">القواعد العامة للإدخال</span>
                 </h2>
             </div>
             <div class="p-6">
                 <ul class="space-y-4">
                     <li class="flex items-start">
-                        <span class="bg-green-100 text-green-800 rounded-full w-8 h-8 flex items-center justify-center mr-4 mt-1 flex-shrink-0 font-bold text-lg">
-                            1
-                        </span>
+                        <span class="bg-green-100 text-green-800 rounded-full w-8 h-8 flex items-center justify-center mr-4 mt-1 flex-shrink-0 font-bold text-lg">1</span>
                         <div>
-                            <h3 class="font-bold text-lg">سؤال واحد لكل كتلة</h3>
-                            <p class="text-gray-700">يجب أن تمثل كل كتلة نصية سؤالاً واحداً فقط.</p>
+                            <h3 class="font-bold text-lg" data-translate-key="rule1_title">سؤال واحد لكل كتلة</h3>
+                            <p class="text-gray-700" data-translate-key="rule1_desc">يجب أن تمثل كل كتلة نصية سؤالاً واحداً فقط.</p>
                         </div>
                     </li>
                     <li class="flex items-start">
-                        <span class="bg-green-100 text-green-800 rounded-full w-8 h-8 flex items-center justify-center mr-4 mt-1 flex-shrink-0 font-bold text-lg">
-                            2
-                        </span>
+                        <span class="bg-green-100 text-green-800 rounded-full w-8 h-8 flex items-center justify-center mr-4 mt-1 flex-shrink-0 font-bold text-lg">2</span>
                         <div>
-                            <h3 class="font-bold text-lg">الفصل بين الأسئلة</h3>
-                            <p class="text-gray-700">لفصل سؤال عن الآخر، استخدم سطراً فارغاً تماماً أو سطراً يحتوي على خمسة نجوم أو أكثر (*****).</p>
+                            <h3 class="font-bold text-lg" data-translate-key="rule2_title">الفصل بين الأسئلة</h3>
+                            <p class="text-gray-700" data-translate-key="rule2_desc">لفصل سؤال عن الآخر، استخدم سطراً فارغاً تماماً أو سطراً يحتوي على خمسة نجوم أو أكثر (*****).</p>
                         </div>
                     </li>
                     <li class="flex items-start">
-                        <span class="bg-green-100 text-green-800 rounded-full w-8 h-8 flex items-center justify-center mr-4 mt-1 flex-shrink-0 font-bold text-lg">
-                            3
-                        </span>
+                        <span class="bg-green-100 text-green-800 rounded-full w-8 h-8 flex items-center justify-center mr-4 mt-1 flex-shrink-0 font-bold text-lg">3</span>
                         <div>
-                            <h3 class="font-bold text-lg">السطر الأول للسؤال</h3>
-                            <p class="text-gray-700">دائماً، يجب أن يكون السطر الأول من كل كتلة نصية هو نص السؤال (Stem).</p>
+                            <h3 class="font-bold text-lg" data-translate-key="rule3_title">السطر الأول للسؤال</h3>
+                            <p class="text-gray-700" data-translate-key="rule3_desc">دائماً، يجب أن يكون السطر الأول من كل كتلة نصية هو نص السؤال (Stem).</p>
                         </div>
                     </li>
                 </ul>
-                <div class="mt-6 bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-r-lg">
+                <div class="mt-6 bg-yellow-50 border-l-4 border-yellow-400 p-4">
                     <div class="flex">
                         <div class="flex-shrink-0">
                             <i class="fas fa-exclamation-triangle text-yellow-500 text-xl"></i>
                         </div>
                         <div class="mr-3">
-                            <p class="text-yellow-800 font-bold">ملاحظة هامة</p>
-                            <p class="text-yellow-700">اتباع هذه القواعد بدقة يضمن تحويلاً مثالياً للأسئلة إلى تنسيق JSON بدون أخطاء.</p>
+                            <p class="text-yellow-800 font-bold" data-translate-key="rules_note_title">ملاحظة هامة</p>
+                            <p class="text-yellow-700" data-translate-key="rules_note_desc">اتباع هذه القواعد بدقة يضمن تحويلاً مثالياً للأسئلة إلى تنسيق JSON بدون أخطاء.</p>
                         </div>
                     </div>
                 </div>
@@ -158,7 +161,7 @@
         <section id="question-types" class="mb-12">
             <div class="bg-gradient-to-r from-indigo-500 to-indigo-700 p-6 text-white rounded-t-xl">
                 <h2 class="text-2xl font-bold flex items-center">
-                    <i class="fas fa-question-circle mr-3"></i> مواصفات أنواع الأسئلة وتنسيقها
+                    <i class="fas fa-question-circle mr-3"></i><span data-translate-key="q_types_title">مواصفات أنواع الأسئلة وتنسيقها</span>
                 </h2>
             </div>
 
@@ -166,19 +169,19 @@
             <div class="bg-white border-b-2 border-gray-200">
                 <nav class="flex overflow-x-auto -mb-px">
                     <div class="flex space-x-1 px-4">
-                        <button onclick="showTab('mcq', this)" class="nav-item px-4 py-3 text-sm font-medium text-center text-gray-500 border-b-2 border-transparent hover:text-blue-600 focus:outline-none">
+                        <button onclick="showTab('mcq', this)" class="nav-item px-4 py-3 text-sm font-medium text-center text-gray-500 border-b-2 border-transparent hover:text-blue-600 focus:outline-none" data-translate-key="tab_mcq">
                             اختيار من متعدد
                         </button>
-                        <button onclick="showTab('matching', this)" class="nav-item px-4 py-3 text-sm font-medium text-center text-gray-500 border-b-2 border-transparent hover:text-blue-600 focus:outline-none">
+                        <button onclick="showTab('matching', this)" class="nav-item px-4 py-3 text-sm font-medium text-center text-gray-500 border-b-2 border-transparent hover:text-blue-600 focus:outline-none" data-translate-key="tab_matching">
                             المطابقة
                         </button>
-                        <button onclick="showTab('gapped', this)" class="nav-item px-4 py-3 text-sm font-medium text-center text-gray-500 border-b-2 border-transparent hover:text-blue-600 focus:outline-none">
+                        <button onclick="showTab('gapped', this)" class="nav-item px-4 py-3 text-sm font-medium text-center text-gray-500 border-b-2 border-transparent hover:text-blue-600 focus:outline-none" data-translate-key="tab_gapped">
                             ملء الفراغات
                         </button>
-                        <button onclick="showTab('string', this)" class="nav-item px-4 py-3 text-sm font-medium text-center text-gray-500 border-b-2 border-transparent hover:text-blue-600 focus:outline-none">
+                        <button onclick="showTab('string', this)" class="nav-item px-4 py-3 text-sm font-medium text-center text-gray-500 border-b-2 border-transparent hover:text-blue-600 focus:outline-none" data-translate-key="tab_string">
                             إجابة نصية قصيرة
                         </button>
-                        <button onclick="showTab('frq', this)" class="nav-item px-4 py-3 text-sm font-medium text-center text-gray-500 border-b-2 border-transparent hover:text-blue-600 focus:outline-none">
+                        <button onclick="showTab('frq', this)" class="nav-item px-4 py-3 text-sm font-medium text-center text-gray-500 border-b-2 border-transparent hover:text-blue-600 focus:outline-none" data-translate-key="tab_frq">
                             مقالي
                         </button>
                     </div>
@@ -189,50 +192,180 @@
             <div class="bg-white rounded-b-xl shadow-md">
                 <!-- MCQ Tab -->
                 <div id="mcq-tab" class="tab-content p-6">
-                    <h3 class="text-xl font-bold text-indigo-800 mb-4 flex items-center">
-                        <i class="fas fa-list-ul mr-2"></i> سؤال الاختيار من متعدد (MCQ)
+                    <!-- Content for MCQ -->
+                </div>
+                <!-- Matching Tab -->
+                <div id="matching-tab" class="tab-content p-6 hidden">
+                    <!-- Content for Matching -->
+                </div>
+                <!-- Gapped Text Tab -->
+                <div id="gapped-tab" class="tab-content p-6 hidden">
+                    <!-- Content for Gapped -->
+                </div>
+                <!-- String Answer Tab -->
+                 <div id="string-tab" class="tab-content p-6 hidden">
+                    <!-- Content for String -->
+                </div>
+                <!-- Free Response Tab -->
+                <div id="frq-tab" class="tab-content p-6 hidden">
+                    <!-- Content for FRQ -->
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Prompts Section -->
+        <section id="ai-prompts" class="mb-12 bg-white rounded-xl shadow-md overflow-hidden">
+            <div class="bg-gradient-to-r from-purple-500 to-purple-700 p-6 text-white">
+                <h2 class="text-2xl font-bold flex items-center">
+                    <i class="fas fa-magic mr-3"></i><span data-translate-key="ai_title">برومبتات AI لتنسيق الأسئلة</span>
+                </h2>
+            </div>
+            <div class="p-6">
+                <p class="mb-6 text-lg leading-relaxed" data-translate-key="ai_desc">
+                    استخدم هذه البرومبتات مع أي نموذج لغوي كبير (LLM) لتحويل أسئلتك غير المنسقة إلى الصيغة الدقيقة التي يتطلبها "محول الأسئلة الذكي".
+                </p>
+                
+                <div class="mb-6 bg-purple-50 p-4 rounded-lg border border-purple-200">
+                    <h3 class="font-bold text-lg text-purple-800 mb-2 flex items-center">
+                        <i class="fas fa-list-ol mr-2"></i><span data-translate-key="ai_usage_title">طريقة الاستخدام:</span>
                     </h3>
-                    <div class="grid md:grid-cols-2 gap-8">
-                        <div>
-                            <h4 class="font-bold text-gray-700 mb-2">الوصف:</h4>
-                            <p class="mb-4">سؤال يتكون من جذر (Stem) وعدة خيارات، واحد منها فقط هو الصحيح.</p>
-                            
-                            <h4 class="font-bold text-gray-700 mb-2">التنسيق:</h4>
-                            <ul class="list-disc list-inside space-y-2 mb-4 bg-gray-50 p-4 rounded-md">
-                                <li>السطر الأول: نص السؤال.</li>
-                                <li>الأسطر التالية: كل خيار في سطر مستقل.</li>
-                                <li>لتحديد الإجابة الصحيحة: ضع علامة النجمة (*) في بداية سطر الإجابة الصحيحة.</li>
-                            </ul>
-                            
-                            <h4 class="font-bold text-gray-700 mb-2">مثال:</h4>
-                            <div class="code-block bg-gray-800 text-gray-100 p-4 rounded-lg relative">
-                                <button class="copy-btn bg-gray-700 text-white px-2 py-1 rounded text-xs" onclick="copyCode(this, 'mcq-example')">
-                                    <i class="fas fa-copy mr-1"></i> نسخ
-                                </button>
-                                <pre id="mcq-example" class="overflow-x-auto">ما هي عاصمة جمهورية مصر العربية؟
+                    <ol class="list-decimal list-inside space-y-2 pl-4 text-purple-900">
+                        <li data-translate-key="ai_usage1">اختر البرومبت المناسب لنوع سؤالك.</li>
+                        <li data-translate-key="ai_usage2">انسخ البرومبت بالكامل.</li>
+                        <li data-translate-key="ai_usage3">استبدل عبارة <code>[...ضع نص سؤالك الخام هنا...]</code> بسؤالك الفعلي.</li>
+                        <li data-translate-key="ai_usage4">أرسل البرومبت المعدل إلى النموذج اللغوي.</li>
+                        <li data-translate-key="ai_usage5">انسخ النتيجة التي سيعطيها لك النموذج والصقها مباشرة في "محول الأسئلة الذكي".</li>
+                    </ol>
+                </div>
+                
+                <!-- Prompts Accordion -->
+                <div class="space-y-4" id="prompts-accordion">
+                    <!-- Accordion items will be generated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Code Logic Section -->
+        <section id="code-logic" class="mb-12 bg-white rounded-xl shadow-md overflow-hidden">
+            <div class="bg-gradient-to-r from-red-500 to-red-700 p-6 text-white">
+                <h2 class="text-2xl font-bold flex items-center">
+                    <i class="fas fa-cogs mr-3"></i><span data-translate-key="logic_title">اكتمال منطق الكود</span>
+                </h2>
+            </div>
+            <div class="p-6">
+                <p class="mb-6 text-lg leading-relaxed" data-translate-key="logic_p1">
+                    بعد المراجعة الشاملة، نؤكد أن منطق التحليل المحلي (<code>_parseLocally</code>) في الكود الحالي مكتمل ويغطي جميع الحالات والتنسيقات المذكورة في هذا التقرير بدقة. كل نوع سؤال له معالج مخصص يتعرف على الكلمات المفتاحية والتراكيب الخاصة به، مما يضمن تحويلاً دقيقاً وموثوقاً إلى بنية البيانات الداخلية قبل تصديرها إلى JSON.
+                </p>
+                
+                <div class="bg-red-50 border-l-4 border-red-500 p-4 mb-6">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-check-circle text-red-500 text-xl"></i>
+                        </div>
+                        <div class="mr-3">
+                            <p class="text-red-800 font-bold" data-translate-key="logic_quality_title">تأكيد الجودة والآلية</p>
+                            <p class="text-red-700" data-translate-key="logic_quality_desc">يعتمد الكود على تحديد نوع السؤال أولاً ثم تطبيق مجموعة قواعد صارمة لاستخراج البيانات. فيما يلي ملخص للتفاصيل الدقيقة لمنطق المعالجة لكل نوع:</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="p-4 border border-gray-200 rounded-lg">
+                        <h4 class="font-bold text-gray-800" data-translate-key="logic_mcq_title">1. الاختيار من متعدد (MCQ):</h4>
+                        <p class="text-gray-600 mt-1" data-translate-key="logic_mcq_desc">يتم تحديد السطر الذي يبدأ بـ <code>*</code> كإجابة صحيحة، مع إزالة أي ترقيمات تلقائية من الخيارات.</p>
+                    </div>
+                    <div class="p-4 border border-gray-200 rounded-lg">
+                        <h4 class="font-bold text-gray-800" data-translate-key="logic_matching_title">2. المطابقة (Matching):</h4>
+                        <p class="text-gray-600 mt-1" data-translate-key="logic_matching_desc">يتم استخدام الفواصل <code>---</code> لتقسيم النص إلى 3 أقسام (قائمة أ، قائمة ب، الإجابات) ثم يتم تحليل قسم الإجابات لربط الفهارس.</p>
+                    </div>
+                    <div class="p-4 border border-gray-200 rounded-lg">
+                        <h4 class="font-bold text-gray-800" data-translate-key="logic_gapped_title">3. ملء الفراغات (Gapped):</h4>
+                        <p class="text-gray-600 mt-1" data-translate-key="logic_gapped_desc">يتم البحث عن علامة الفراغ <code>____</code> في السؤال، ثم البحث عن قسم الإجابات الذي يبدأ بـ <code>الترتيب:</code> أو ما يماثلها لتحديد قيمة كل فراغ.</p>
+                    </div>
+                    <div class="p-4 border border-gray-200 rounded-lg">
+                        <h4 class="font-bold text-gray-800" data-translate-key="logic_string_frq_title">4. إجابة قصيرة (String) ومقالي (FRQ):</h4>
+                        <p class="text-gray-600 mt-1" data-translate-key="logic_string_frq_desc">يتم البحث عن الكلمات المفتاحية <code>الجواب:</code> أو <code>الجواب النموذجي:</code>، وكل ما يتبعها يعتبر هو الإجابة.</p>
+                    </div>
+                </div>
+
+                <p class="mt-6 text-gray-700" data-translate-key="logic_conclusion">هذا المنطق يضمن أن كل جزء من النص المدخل يتم تحليله وتصنيفه بشكل صحيح، مما يؤدي إلى إنشاء ملف JSON دقيق وموثوق.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <h3 class="text-xl font-bold flex items-center">
+                        <i class="fas fa-brain mr-2"></i><span data-translate-key="footer_title">محول الأسئلة الذكي</span>
+                    </h3>
+                    <p class="text-gray-400 mt-1" data-translate-key="footer_subtitle">أداة متقدمة لتحويل الأسئلة إلى تنسيق JSON معياري</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-300 hover:text-white transition-colors"><i class="fab fa-github text-xl"></i></a>
+                    <a href="#" class="text-gray-300 hover:text-white transition-colors"><i class="fab fa-twitter text-xl"></i></a>
+                    <a href="#" class="text-gray-300 hover:text-white transition-colors"><i class="fas fa-envelope text-xl"></i></a>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-6 pt-6 text-center text-gray-400 text-sm">
+                <p data-translate-key="footer_copyright">&copy; 2025 محول الأسئلة الذكي. جميع الحقوق محفوظة.</p>
+                <p class="mt-1" data-translate-key="footer_version">الإصدار 3.0 - 23 يوليو 2025</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- DATA AND TRANSLATIONS ---
+        const translations = {
+            ar: {
+                main_title: 'محول الأسئلة الذكي',
+                main_subtitle: 'أداة تحويل الأسئلة إلى تنسيق JSON معياري',
+                version: 'الإصدار: 3.0',
+                release_date: '23 يوليو 2025',
+                translate_btn: 'English',
+                intro_title: 'مقدمة',
+                intro_p1: 'يهدف تطبيق "محول الأسئلة الذكي" إلى تحويل نصوص الأسئلة المكتوبة بصيغ محددة إلى تنسيق JSON معياري ومتقدم، مما يسهل عملية أرشفة الأسئلة واستخدامها في الأنظمة التعليمية الرقمية.',
+                intro_local_title: 'التحليل الذكي (المحلي)',
+                intro_local_desc: 'تحليل سريع ومباشر يعتمد على قواعد وتنسيقات محددة مسبقًا لكل نوع سؤال، يضمن نتائج دقيقة بدون اتصال بالإنترنت.',
+                intro_ai_title: 'التحسين بالذكاء الاصطناعي (اختياري)',
+                intro_ai_desc: 'استخدام واجهة برمجة تطبيقات Gemini AI لمراجعة وتحسين دقة التحليل الأولي عند الحاجة لمزيد من الدقة.',
+                rules_title: 'القواعد العامة للإدخال',
+                rule1_title: 'سؤال واحد لكل كتلة',
+                rule1_desc: 'يجب أن تمثل كل كتلة نصية سؤالاً واحداً فقط.',
+                rule2_title: 'الفصل بين الأسئلة',
+                rule2_desc: 'لفصل سؤال عن الآخر، استخدم سطراً فارغاً تماماً أو سطراً يحتوي على خمسة نجوم أو أكثر (*****).',
+                rule3_title: 'السطر الأول للسؤال',
+                rule3_desc: 'دائماً، يجب أن يكون السطر الأول من كل كتلة نصية هو نص السؤال (Stem).',
+                rules_note_title: 'ملاحظة هامة',
+                rules_note_desc: 'اتباع هذه القواعد بدقة يضمن تحويلاً مثالياً للأسئلة إلى تنسيق JSON بدون أخطاء.',
+                q_types_title: 'مواصفات أنواع الأسئلة وتنسيقها',
+                tab_mcq: 'اختيار من متعدد',
+                tab_matching: 'المطابقة',
+                tab_gapped: 'ملء الفراغات',
+                tab_string: 'إجابة نصية قصيرة',
+                tab_frq: 'مقالي',
+                common_desc_title: 'الوصف:',
+                common_format_title: 'التنسيق:',
+                common_example_title: 'مثال:',
+                common_logic_title: 'منطق الكود:',
+                common_json_title: 'JSON الناتج:',
+                common_copy_btn: 'نسخ',
+                mcq_title: 'سؤال الاختيار من متعدد (MCQ)',
+                mcq_desc: 'سؤال يتكون من جذر (Stem) وعدة خيارات، واحد منها فقط هو الصحيح.',
+                mcq_format1: 'السطر الأول: نص السؤال.',
+                mcq_format2: 'الأسطر التالية: كل خيار في سطر مستقل.',
+                mcq_format3: 'لتحديد الإجابة الصحيحة: ضع علامة النجمة (*) في بداية سطر الإجابة الصحيحة.',
+                mcq_logic1: 'يتعرف الكود على السطر الأول كنص للسؤال.',
+                mcq_logic2: 'يعالج كل سطر تالٍ كخيار مستقل.',
+                mcq_logic3: 'السطر الذي يبدأ بـ <code>*</code> يتم تحديده كإجابة صحيحة (answer index)، وتتم إزالة النجمة من النص.',
+                mcq_logic4: 'يقوم الكود تلقائيًا بإزالة الترقيمات الشائعة (مثل أ. أو 1)) من بداية الخيارات.',
+                mcq_example_text: `ما هي عاصمة جمهورية مصر العربية؟
 أ. الإسكندرية
 *ب. القاهرة
-ج. الجيزة</pre>
-                            </div>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-gray-700 mb-2">منطق الكود:</h4>
-                            <ul class="list-disc list-inside space-y-2 mb-4">
-                                <li>يتعرف الكود على السطر الأول كنص للسؤال.</li>
-                                <li>يعالج كل سطر تالٍ كخيار مستقل.</li>
-                                <li>السطر الذي يبدأ بـ <code>*</code> يتم تحديده كإجابة صحيحة (answer index)، وتتم إزالة النجمة من النص.</li>
-                                <li>يقوم الكود تلقائيًا بإزالة الترقيمات الشائعة (مثل أ. أو 1)) من بداية الخيارات.</li>
-                            </ul>
-                            
-                            <div class="mt-6 bg-blue-50 border-l-4 border-blue-400 rounded-r-lg p-4">
-                                <h4 class="font-bold text-blue-800 mb-2 flex items-center">
-                                    <i class="fas fa-code mr-2"></i> JSON الناتج:
-                                </h4>
-                                <div class="code-block bg-gray-800 text-gray-100 p-4 rounded-lg relative">
-                                    <button class="copy-btn bg-gray-700 text-white px-2 py-1 rounded text-xs" onclick="copyCode(this, 'mcq-json')">
-                                        <i class="fas fa-copy mr-1"></i> نسخ
-                                    </button>
-                                    <pre id="mcq-json" class="overflow-x-auto">{
+ج. الجيزة`,
+                mcq_json_text: `{
   "type": "mcq",
   "stem": "ما هي عاصمة جمهورية مصر العربية؟",
   "choices": [
@@ -241,38 +374,18 @@
     "الجيزة"
   ],
   "answer": 1
-}</pre>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Matching Tab -->
-                <div id="matching-tab" class="tab-content p-6 hidden">
-                    <h3 class="text-xl font-bold text-indigo-800 mb-4 flex items-center">
-                        <i class="fas fa-link mr-2"></i> سؤال المطابقة (Matching)
-                    </h3>
-                    <div class="grid md:grid-cols-2 gap-8">
-                        <div>
-                            <h4 class="font-bold text-gray-700 mb-2">الوصف:</h4>
-                            <p class="mb-4">سؤال يطلب من المستخدم مطابقة عناصر من قائمتين.</p>
-                            
-                            <h4 class="font-bold text-gray-700 mb-2">التنسيق:</h4>
-                            <ul class="list-disc list-inside space-y-2 mb-4 bg-gray-50 p-4 rounded-md">
-                                <li>السطر الأول: نص السؤال.</li>
-                                <li>استخدم العلامة <code>--- القائمة أ ---</code> لبدء القائمة الأولى.</li>
-                                <li>استخدم العلامة <code>--- القائمة ب ---</code> لبدء القائمة الثانية.</li>
-                                <li>استخدم العلامة <code>--- الإجابات ---</code> لتحديد الإجابات.</li>
-                                <li>اكتب كل مطابقة في سطر بالتنسيق: <code>رقم من أ : رقم من ب</code>.</li>
-                            </ul>
-                            
-                            <h4 class="font-bold text-gray-700 mb-2">مثال:</h4>
-                            <div class="code-block bg-gray-800 text-gray-100 p-4 rounded-lg relative">
-                                <button class="copy-btn bg-gray-700 text-white px-2 py-1 rounded text-xs" onclick="copyCode(this, 'matching-example')">
-                                    <i class="fas fa-copy mr-1"></i> نسخ
-                                </button>
-                                <pre id="matching-example" class="overflow-x-auto">صل كل دولة بعاصمتها.
+}`,
+                matching_title: 'سؤال المطابقة (Matching)',
+                matching_desc: 'سؤال يطلب من المستخدم مطابقة عناصر من قائمتين.',
+                matching_format1: 'السطر الأول: نص السؤال.',
+                matching_format2: 'استخدم العلامة <code>--- القائمة أ ---</code> لبدء القائمة الأولى.',
+                matching_format3: 'استخدم العلامة <code>--- القائمة ب ---</code> لبدء القائمة الثانية.',
+                matching_format4: 'استخدم العلامة <code>--- الإجابات ---</code> لتحديد الإجابات.',
+                matching_format5: 'اكتب كل مطابقة في سطر بالتنسيق: <code>رقم من أ : رقم من ب</code>.',
+                matching_logic1: 'يستخدم الكود العلامات الإرشادية (<code>---...---</code>) لتوزيع العناصر على <code>group1</code> و <code>group2</code>.',
+                matching_logic2: 'يقرأ قسم الإجابات لإنشاء مصفوفة <code>answer</code> التي تحتوي على أزواج من فهارس العناصر المتطابقة (تبدأ من 0).',
+                matching_logic3: 'العلامات الإرشادية وقسم الإجابات لا يظهران في ملف JSON النهائي.',
+                matching_example_text: `صل كل دولة بعاصمتها.
 --- القائمة أ ---
 1. السعودية
 2. الإمارات
@@ -284,26 +397,8 @@
 --- الإجابات ---
 1 : 2
 2 : 3
-3 : 1</pre>
-                            </div>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-gray-700 mb-2">منطق الكود:</h4>
-                            <ul class="list-disc list-inside space-y-2 mb-4">
-                                <li>يستخدم الكود العلامات الإرشادية (<code>---...---</code>) لتوزيع العناصر على <code>group1</code> و <code>group2</code>.</li>
-                                <li>يقرأ قسم الإجابات لإنشاء مصفوفة <code>answer</code> التي تحتوي على أزواج من فهارس العناصر المتطابقة (تبدأ من 0).</li>
-                                <li>العلامات الإرشادية وقسم الإجابات لا يظهران في ملف JSON النهائي.</li>
-                            </ul>
-                            
-                            <div class="mt-6 bg-blue-50 border-l-4 border-blue-400 rounded-r-lg p-4">
-                                <h4 class="font-bold text-blue-800 mb-2 flex items-center">
-                                    <i class="fas fa-code mr-2"></i> JSON الناتج:
-                                </h4>
-                                <div class="code-block bg-gray-800 text-gray-100 p-4 rounded-lg relative">
-                                    <button class="copy-btn bg-gray-700 text-white px-2 py-1 rounded text-xs" onclick="copyCode(this, 'matching-json')">
-                                        <i class="fas fa-copy mr-1"></i> نسخ
-                                    </button>
-                                    <pre id="matching-json" class="overflow-x-auto">{
+3 : 1`,
+                matching_json_text: `{
   "type": "matching",
   "stem": "صل كل دولة بعاصمتها.",
   "group1": [
@@ -321,216 +416,65 @@
     [1, 2],
     [2, 0]
   ]
-}</pre>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Gapped Text Tab -->
-                <div id="gapped-tab" class="tab-content p-6 hidden">
-                    <h3 class="text-xl font-bold text-indigo-800 mb-4 flex items-center">
-                        <i class="fas fa-grip-lines mr-2"></i> سؤال ملء الفراغات (Gapped Text)
-                    </h3>
-                    <div class="grid md:grid-cols-2 gap-8">
-                        <div>
-                            <h4 class="font-bold text-gray-700 mb-2">الوصف:</h4>
-                            <p class="mb-4">سؤال يحتوي على نص به فراغ واحد أو أكثر ليتم إكماله.</p>
-                            
-                            <h4 class="font-bold text-gray-700 mb-2">التنسيق:</h4>
-                            <ul class="list-disc list-inside space-y-2 mb-4 bg-gray-50 p-4 rounded-md">
-                                <li>السطر الأول: نص السؤال، مع استخدام <code>____</code> (4 شرطات سفلية أو أكثر) لكل فراغ.</li>
-                                <li>لتحديد الإجابات: استخدم كلمة مفتاحية مثل <code>الترتيب:</code> أو <code>--- الإجابات ---</code> في سطر مستقل.</li>
-                                <li>في الأسطر التالية، اكتب: <code>رقم الفراغ: الإجابة الصحيحة</code>.</li>
-                            </ul>
-                            
-                            <h4 class="font-bold text-gray-700 mb-2">مثال:</h4>
-                            <div class="code-block bg-gray-800 text-gray-100 p-4 rounded-lg relative">
-                                <button class="copy-btn bg-gray-700 text-white px-2 py-1 rounded text-xs" onclick="copyCode(this, 'gapped-example')">
-                                    <i class="fas fa-copy mr-1"></i> نسخ
-                                </button>
-                                <pre id="gapped-example" class="overflow-x-auto">يتكون الماء من ____ والأكسجين هو ____.
+}`,
+                gapped_title: 'سؤال ملء الفراغات (Gapped Text)',
+                gapped_desc: 'سؤال يحتوي على نص به فراغ واحد أو أكثر ليتم إكماله.',
+                gapped_format1: 'السطر الأول: نص السؤال، مع استخدام <code>____</code> (4 شرطات سفلية أو أكثر) لكل فراغ.',
+                gapped_format2: 'لتحديد الإجابات: استخدم كلمة مفتاحية مثل <code>الترتيب:</code> أو <code>--- الإجابات ---</code> في سطر مستقل.',
+                gapped_format3: 'في الأسطر التالية، اكتب: <code>رقم الفراغ: الإجابة الصحيحة</code>.',
+                gapped_logic1: 'يتعرف الكود على الكلمات المفتاحية لتحديد قسم الإجابات.',
+                gapped_logic2: 'يقرأ كل سطر في قسم الإجابات لاستخراج رقم الفراغ (order) وقيمة الإجابة (value).',
+                gapped_logic3: 'يستبدل كل <code>____</code> في النص بوسم HTML خاص بالفراغات.',
+                gapped_logic4: 'يستخدم الإجابات المحددة لتعبئة حقل <code>gap_text_keys</code> في ملف JSON.',
+                gapped_example_text: `يتكون الماء من ____ والأكسجين هو ____.
 الترتيب:
 2: غاز قابل للاشتعال
-1: الهيدروجين</pre>
-                            </div>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-gray-700 mb-2">منطق الكود:</h4>
-                            <ul class="list-disc list-inside space-y-2 mb-4">
-                                <li>يتعرف الكود على الكلمات المفتاحية لتحديد قسم الإجابات.</li>
-                                <li>يقرأ كل سطر في قسم الإجابات لاستخراج رقم الفراغ (order) وقيمة الإجابة (value).</li>
-                                <li>يستبدل كل <code>____</code> في النص بوسم HTML خاص بالفراغات.</li>
-                                <li>يستخدم الإجابات المحددة لتعبئة حقل <code>gap_text_keys</code> في ملف JSON.</li>
-                            </ul>
-                            
-                            <div class="mt-6 bg-blue-50 border-l-4 border-blue-400 rounded-r-lg p-4">
-                                <h4 class="font-bold text-blue-800 mb-2 flex items-center">
-                                    <i class="fas fa-code mr-2"></i> JSON الناتج:
-                                </h4>
-                                <div class="code-block bg-gray-800 text-gray-100 p-4 rounded-lg relative">
-                                    <button class="copy-btn bg-gray-700 text-white px-2 py-1 rounded text-xs" onclick="copyCode(this, 'gapped-json')">
-                                        <i class="fas fa-copy mr-1"></i> نسخ
-                                    </button>
-                                    <pre id="gapped-json" class="overflow-x-auto">{
+1: الهيدروجين`,
+                gapped_json_text: `{
   "type": "gapped",
-  "stem": "يتكون الماء من &lt;span data-node-type=\"blank-line\"&gt; &lt;/span&gt; والأكسجين هو &lt;span data-node-type=\"blank-line\"&gt; &lt;/span&gt;.",
+  "stem": "يتكون الماء من &lt;span&gt; &lt;/span&gt; والأكسجين هو &lt;span&gt; &lt;/span&gt;.",
   "gap_text_keys": [
     { "order": 0, "value": "الهيدروجين" },
     { "order": 1, "value": "غاز قابل للاشتعال" }
   ]
-}</pre>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- String Answer Tab -->
-                <div id="string-tab" class="tab-content p-6 hidden">
-                    <h3 class="text-xl font-bold text-indigo-800 mb-4 flex items-center">
-                        <i class="fas fa-align-left mr-2"></i> سؤال إجابة نصية قصيرة (String)
-                    </h3>
-                    <div class="grid md:grid-cols-2 gap-8">
-                        <div>
-                            <h4 class="font-bold text-gray-700 mb-2">الوصف:</h4>
-                            <p class="mb-4">سؤال يتطلب إجابة قصيرة ومحددة.</p>
-                            
-                            <h4 class="font-bold text-gray-700 mb-2">التنسيق:</h4>
-                            <ul class="list-disc list-inside space-y-2 mb-4 bg-gray-50 p-4 rounded-md">
-                                <li>السطر الأول: نص السؤال.</li>
-                                <li>السطر التالي: يجب أن يبدأ بكلمة <code>الجواب:</code> متبوعة بمسافة ثم الإجابة.</li>
-                            </ul>
-                            
-                            <h4 class="font-bold text-gray-700 mb-2">مثال:</h4>
-                            <div class="code-block bg-gray-800 text-gray-100 p-4 rounded-lg relative">
-                                <button class="copy-btn bg-gray-700 text-white px-2 py-1 rounded text-xs" onclick="copyCode(this, 'string-example')">
-                                    <i class="fas fa-copy mr-1"></i> نسخ
-                                </button>
-                                <pre id="string-example" class="overflow-x-auto">من هو أول الخلفاء الراشدين؟
-الجواب: أبو بكر الصديق</pre>
-                            </div>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-gray-700 mb-2">منطق الكود:</h4>
-                            <ul class="list-disc list-inside space-y-2 mb-4">
-                                <li>يبحث الكود عن السطر الذي يبدأ بـ <code>الجواب:</code>.</li>
-                                <li>يستخلص كل النص الذي يأتي بعد هذه الكلمة المفتاحية ويعتبره الإجابة.</li>
-                            </ul>
-                            
-                            <div class="mt-6 bg-blue-50 border-l-4 border-blue-400 rounded-r-lg p-4">
-                                <h4 class="font-bold text-blue-800 mb-2 flex items-center">
-                                    <i class="fas fa-code mr-2"></i> JSON الناتج:
-                                </h4>
-                                <div class="code-block bg-gray-800 text-gray-100 p-4 rounded-lg relative">
-                                    <button class="copy-btn bg-gray-700 text-white px-2 py-1 rounded text-xs" onclick="copyCode(this, 'string-json')">
-                                        <i class="fas fa-copy mr-1"></i> نسخ
-                                    </button>
-                                    <pre id="string-json" class="overflow-x-auto">{
+}`,
+                string_title: 'سؤال إجابة نصية قصيرة (String)',
+                string_desc: 'سؤال يتطلب إجابة قصيرة ومحددة.',
+                string_format1: 'السطر الأول: نص السؤال.',
+                string_format2: 'السطر التالي: يجب أن يبدأ بكلمة <code>الجواب:</code> متبوعة بمسافة ثم الإجابة.',
+                string_logic1: 'يبحث الكود عن السطر الذي يبدأ بـ <code>الجواب:</code>.',
+                string_logic2: 'يستخلص كل النص الذي يأتي بعد هذه الكلمة المفتاحية ويعتبره الإجابة.',
+                string_example_text: `من هو أول الخلفاء الراشدين؟
+الجواب: أبو بكر الصديق`,
+                string_json_text: `{
   "type": "string",
   "stem": "من هو أول الخلفاء الراشدين؟",
   "answer": "أبو بكر الصديق"
-}</pre>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Free Response Tab -->
-                <div id="frq-tab" class="tab-content p-6 hidden">
-                    <h3 class="text-xl font-bold text-indigo-800 mb-4 flex items-center">
-                        <i class="fas fa-pen-fancy mr-2"></i> سؤال مقالي (Free Response / FRQ)
-                    </h3>
-                    <div class="grid md:grid-cols-2 gap-8">
-                        <div>
-                            <h4 class="font-bold text-gray-700 mb-2">الوصف:</h4>
-                            <p class="mb-4">سؤال يتطلب إجابة طويلة ومفتوحة.</p>
-                            
-                            <h4 class="font-bold text-gray-700 mb-2">التنسيق:</h4>
-                            <ul class="list-disc list-inside space-y-2 mb-4 bg-gray-50 p-4 rounded-md">
-                                <li>السطر الأول: نص السؤال.</li>
-                                <li>السطر التالي: يجب أن يبدأ بعبارة <code>الجواب النموذجي:</code> متبوعة بالإجابة.</li>
-                                <li>يمكن أن تمتد الإجابة على عدة أسطر.</li>
-                            </ul>
-                            
-                            <h4 class="font-bold text-gray-700 mb-2">مثال:</h4>
-                            <div class="code-block bg-gray-800 text-gray-100 p-4 rounded-lg relative">
-                                <button class="copy-btn bg-gray-700 text-white px-2 py-1 rounded text-xs" onclick="copyCode(this, 'frq-example')">
-                                    <i class="fas fa-copy mr-1"></i> نسخ
-                                </button>
-                                <pre id="frq-example" class="overflow-x-auto">اشرح بإيجاز دور التكنولوجيا في التعليم الحديث.
-الجواب النموذجي: تلعب التكنولوجيا دوراً محورياً في تطوير التعليم من خلال توفير مصادر متنوعة وسهولة الوصول إليها، بالإضافة إلى أدوات تفاعلية تعزز من مشاركة الطلاب.</pre>
-                            </div>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-gray-700 mb-2">منطق الكود:</h4>
-                            <ul class="list-disc list-inside space-y-2 mb-4">
-                                <li>يبحث الكود عن السطر الذي يبدأ بـ <code>الجواب النموذجي:</code>.</li>
-                                <li>يستخلص النص في هذا السطر وكل الأسطر التي تليه ويعتبرها الإجابة الكاملة.</li>
-                            </ul>
-                            
-                            <div class="mt-6 bg-blue-50 border-l-4 border-blue-400 rounded-r-lg p-4">
-                                <h4 class="font-bold text-blue-800 mb-2 flex items-center">
-                                    <i class="fas fa-code mr-2"></i> JSON الناتج:
-                                </h4>
-                                <div class="code-block bg-gray-800 text-gray-100 p-4 rounded-lg relative">
-                                    <button class="copy-btn bg-gray-700 text-white px-2 py-1 rounded text-xs" onclick="copyCode(this, 'frq-json')">
-                                        <i class="fas fa-copy mr-1"></i> نسخ
-                                    </button>
-                                    <pre id="frq-json" class="overflow-x-auto">{
+}`,
+                frq_title: 'سؤال مقالي (Free Response / FRQ)',
+                frq_desc: 'سؤال يتطلب إجابة طويلة ومفتوحة.',
+                frq_format1: 'السطر الأول: نص السؤال.',
+                frq_format2: 'السطر التالي: يجب أن يبدأ بعبارة <code>الجواب النموذجي:</code> متبوعة بالإجابة.',
+                frq_format3: 'يمكن أن تمتد الإجابة على عدة أسطر.',
+                frq_logic1: 'يبحث الكود عن السطر الذي يبدأ بـ <code>الجواب النموذجي:</code>.',
+                frq_logic2: 'يستخلص النص في هذا السطر وكل الأسطر التي تليه ويعتبرها الإجابة الكاملة.',
+                frq_example_text: `اشرح بإيجاز دور التكنولوجيا في التعليم الحديث.
+الجواب النموذجي: تلعب التكنولوجيا دوراً محورياً في تطوير التعليم من خلال توفير مصادر متنوعة وسهولة الوصول إليها، بالإضافة إلى أدوات تفاعلية تعزز من مشاركة الطلاب.`,
+                frq_json_text: `{
   "type": "frq",
   "stem": "اشرح بإيجاز دور التكنولوجيا في التعليم الحديث.",
   "answer": "تلعب التكنولوجيا دوراً محورياً في تطوير التعليم من خلال توفير مصادر متنوعة وسهولة الوصول إليها، بالإضافة إلى أدوات تفاعلية تعزز من مشاركة الطلاب."
-}</pre>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- AI Prompts Section -->
-        <section id="ai-prompts" class="mb-12 bg-white rounded-xl shadow-md overflow-hidden">
-            <div class="bg-gradient-to-r from-purple-500 to-purple-700 p-6 text-white">
-                <h2 class="text-2xl font-bold flex items-center">
-                    <i class="fas fa-magic mr-3"></i> برومبتات AI لتنسيق الأسئلة
-                </h2>
-            </div>
-            <div class="p-6">
-                <p class="mb-6 text-lg leading-relaxed">
-                    استخدم هذه البرومبتات مع أي نموذج لغوي كبير (LLM) لتحويل أسئلتك غير المنسقة إلى الصيغة الدقيقة التي يتطلبها "محول الأسئلة الذكي".
-                </p>
-                
-                <div class="mb-6 bg-purple-50 p-4 rounded-lg border border-purple-200">
-                    <h3 class="font-bold text-lg text-purple-800 mb-2 flex items-center">
-                        <i class="fas fa-list-ol mr-2"></i> طريقة الاستخدام:
-                    </h3>
-                    <ol class="list-decimal list-inside space-y-2 pl-4 text-purple-900">
-                        <li>اختر البرومبت المناسب لنوع سؤالك.</li>
-                        <li>انسخ البرومبت بالكامل.</li>
-                        <li>استبدل عبارة <code>[...ضع نص سؤالك الخام هنا...]</code> بسؤالك الفعلي.</li>
-                        <li>أرسل البرومبت المعدل إلى النموذج اللغوي.</li>
-                        <li>انسخ النتيجة التي سيعطيها لك النموذج والصقها مباشرة في "محول الأسئلة الذكي".</li>
-                    </ol>
-                </div>
-                
-                <!-- Prompts Accordion -->
-                <div class="space-y-4">
-                    <!-- MCQ Prompt -->
-                    <div class="border border-gray-200 rounded-lg overflow-hidden">
-                        <button onclick="togglePrompt('mcq-prompt')" class="w-full flex justify-between items-center p-4 bg-gray-50 hover:bg-gray-100 text-gray-800 font-bold focus:outline-none">
-                            <span>1. برومبت سؤال الاختيار من متعدد (MCQ)</span>
-                            <i class="fas fa-chevron-down transition-transform duration-300" id="mcq-prompt-icon"></i>
-                        </button>
-                        <div id="mcq-prompt" class="hidden p-4 bg-white border-t border-gray-200">
-                            <div class="code-block bg-gray-800 text-gray-100 p-4 rounded-lg relative">
-                                <button class="copy-btn bg-gray-700 text-white px-2 py-1 rounded text-xs" onclick="copyCode(this, 'mcq-prompt-text')">
-                                    <i class="fas fa-copy mr-1"></i> نسخ
-                                </button>
-                                <pre id="mcq-prompt-text" class="overflow-x-auto">مهمتك هي تنسيق السؤال التالي كـ "سؤال اختيار من متعدد" (MCQ) بناءً على القواعد الصارمة التالية:
+}`,
+                ai_title: 'برومبتات AI لتنسيق الأسئلة',
+                ai_desc: 'استخدم هذه البرومبتات مع أي نموذج لغوي كبير (LLM) لتحويل أسئلتك غير المنسقة إلى الصيغة الدقيقة التي يتطلبها "محول الأسئلة الذكي".',
+                ai_usage_title: 'طريقة الاستخدام:',
+                ai_usage1: 'اختر البرومبت المناسب لنوع سؤالك.',
+                ai_usage2: 'انسخ البرومبت بالكامل.',
+                ai_usage3: 'استبدل عبارة <code>[...ضع نص سؤالك الخام هنا...]</code> بسؤالك الفعلي.',
+                ai_usage4: 'أرسل البرومبت المعدل إلى النموذج اللغوي.',
+                ai_usage5: 'انسخ النتيجة التي سيعطيها لك النموذج والصقها مباشرة في "محول الأسئلة الذكي".',
+                ai_mcq_title: '1. برومبت سؤال الاختيار من متعدد (MCQ)',
+                ai_mcq_prompt: `مهمتك هي تنسيق السؤال التالي كـ "سؤال اختيار من متعدد" (MCQ) بناءً على القواعد الصارمة التالية:
 1.  السطر الأول يجب أن يكون نص السؤال فقط.
 2.  كل سطر تالٍ يجب أن يحتوي على خيار واحد فقط.
 3.  يجب وضع علامة نجمة (*) في بداية سطر الإجابة الصحيحة فقط.
@@ -544,23 +488,9 @@
 الدمام
 
 الآن، قم بتطبيق هذه القواعد على السؤال التالي:
-[...ضع نص سؤالك الخام هنا، مع تحديد الإجابة الصحيحة بأي شكل...]</pre>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Matching Prompt -->
-                    <div class="border border-gray-200 rounded-lg overflow-hidden">
-                        <button onclick="togglePrompt('matching-prompt')" class="w-full flex justify-between items-center p-4 bg-gray-50 hover:bg-gray-100 text-gray-800 font-bold focus:outline-none">
-                            <span>2. برومبت سؤال المطابقة (Matching)</span>
-                            <i class="fas fa-chevron-down transition-transform duration-300" id="matching-prompt-icon"></i>
-                        </button>
-                        <div id="matching-prompt" class="hidden p-4 bg-white border-t border-gray-200">
-                            <div class="code-block bg-gray-800 text-gray-100 p-4 rounded-lg relative">
-                                <button class="copy-btn bg-gray-700 text-white px-2 py-1 rounded text-xs" onclick="copyCode(this, 'matching-prompt-text')">
-                                    <i class="fas fa-copy mr-1"></i> نسخ
-                                </button>
-                                <pre id="matching-prompt-text" class="overflow-x-auto">مهمتك هي تنسيق السؤال التالي كـ "سؤال مطابقة" (Matching) بناءً على القواعد الصارمة التالية:
+[...ضع نص سؤالك الخام هنا، مع تحديد الإجابة الصحيحة بأي شكل...]`,
+                ai_matching_title: '2. برومبت سؤال المطابقة (Matching)',
+                ai_matching_prompt: `مهمتك هي تنسيق السؤال التالي كـ "سؤال مطابقة" (Matching) بناءً على القواعد الصارمة التالية:
 1.  السطر الأول هو نص السؤال.
 2.  استخدم "--- القائمة أ ---" كعنوان للقائمة الأولى.
 3.  استخدم "--- القائمة ب ---" كعنوان للقائمة الثانية.
@@ -584,23 +514,9 @@
 3 : 1
 
 الآن، قم بتطبيق هذه القواعد على السؤال التالي:
-[...ضع نص سؤالك الخام هنا مع عناصره وإجاباته...]</pre>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Gapped Text Prompt -->
-                    <div class="border border-gray-200 rounded-lg overflow-hidden">
-                        <button onclick="togglePrompt('gapped-prompt')" class="w-full flex justify-between items-center p-4 bg-gray-50 hover:bg-gray-100 text-gray-800 font-bold focus:outline-none">
-                            <span>3. برومبت سؤال ملء الفراغات (Gapped Text)</span>
-                            <i class="fas fa-chevron-down transition-transform duration-300" id="gapped-prompt-icon"></i>
-                        </button>
-                        <div id="gapped-prompt" class="hidden p-4 bg-white border-t border-gray-200">
-                            <div class="code-block bg-gray-800 text-gray-100 p-4 rounded-lg relative">
-                                <button class="copy-btn bg-gray-700 text-white px-2 py-1 rounded text-xs" onclick="copyCode(this, 'gapped-prompt-text')">
-                                    <i class="fas fa-copy mr-1"></i> نسخ
-                                </button>
-                                <pre id="gapped-prompt-text" class="overflow-x-auto">مهمتك هي تنسيق السؤال التالي كـ "سؤال ملء فراغات" (Gapped Text) بناءً على القواعد الصارمة التالية:
+[...ضع نص سؤالك الخام هنا مع عناصره وإجاباته...]`,
+                ai_gapped_title: '3. برومبت سؤال ملء الفراغات (Gapped Text)',
+                ai_gapped_prompt: `مهمتك هي تنسيق السؤال التالي كـ "سؤال ملء فراغات" (Gapped Text) بناءً على القواعد الصارمة التالية:
 1.  السطر الأول هو نص السؤال، مع وضع "____" (4 شرطات سفلية) مكان كل فراغ.
 2.  ابدأ قسم الإجابات بكلمة "الترتيب:" في سطر مستقل.
 3.  في الأسطر التالية، حدد إجابة كل فراغ بالصيغة "رقم الفراغ : الإجابة".
@@ -613,23 +529,9 @@
 1: الهيدروجين
 
 الآن، قم بتطبيق هذه القواعد على السؤال التالي:
-[...ضع نص سؤالك الخام هنا مع الإجابات...]</pre>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- String Answer Prompt -->
-                    <div class="border border-gray-200 rounded-lg overflow-hidden">
-                        <button onclick="togglePrompt('string-prompt')" class="w-full flex justify-between items-center p-4 bg-gray-50 hover:bg-gray-100 text-gray-800 font-bold focus:outline-none">
-                            <span>4. برومبت سؤال إجابة نصية قصيرة (String)</span>
-                            <i class="fas fa-chevron-down transition-transform duration-300" id="string-prompt-icon"></i>
-                        </button>
-                        <div id="string-prompt" class="hidden p-4 bg-white border-t border-gray-200">
-                            <div class="code-block bg-gray-800 text-gray-100 p-4 rounded-lg relative">
-                                <button class="copy-btn bg-gray-700 text-white px-2 py-1 rounded text-xs" onclick="copyCode(this, 'string-prompt-text')">
-                                    <i class="fas fa-copy mr-1"></i> نسخ
-                                </button>
-                                <pre id="string-prompt-text" class="overflow-x-auto">مهمتك هي تنسيق السؤال التالي كـ "سؤال إجابة نصية قصيرة" (String) بناءً على القواعد الصارمة التالية:
+[...ضع نص سؤالك الخام هنا مع الإجابات...]`,
+                ai_string_title: '4. برومبت سؤال إجابة نصية قصيرة (String)',
+                ai_string_prompt: `مهمتك هي تنسيق السؤال التالي كـ "سؤال إجابة نصية قصيرة" (String) بناءً على القواعد الصارمة التالية:
 1.  السطر الأول هو نص السؤال.
 2.  السطر الثاني يجب أن يبدأ بكلمة "الجواب:" ثم مسافة، ثم الإجابة.
 3.  لا تكتب أي شيء إطلاقاً قبل أو بعد النص المنسق.
@@ -639,23 +541,9 @@
 الجواب: أبو بكر الصديق
 
 الآن، قم بتطبيق هذه القواعد على السؤال التالي:
-[...ضع نص سؤالك الخام هنا مع إجابته...]</pre>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- FRQ Prompt -->
-                    <div class="border border-gray-200 rounded-lg overflow-hidden">
-                        <button onclick="togglePrompt('frq-prompt')" class="w-full flex justify-between items-center p-4 bg-gray-50 hover:bg-gray-100 text-gray-800 font-bold focus:outline-none">
-                            <span>5. برومبت سؤال مقالي (Free Response / FRQ)</span>
-                            <i class="fas fa-chevron-down transition-transform duration-300" id="frq-prompt-icon"></i>
-                        </button>
-                        <div id="frq-prompt" class="hidden p-4 bg-white border-t border-gray-200">
-                            <div class="code-block bg-gray-800 text-gray-100 p-4 rounded-lg relative">
-                                <button class="copy-btn bg-gray-700 text-white px-2 py-1 rounded text-xs" onclick="copyCode(this, 'frq-prompt-text')">
-                                    <i class="fas fa-copy mr-1"></i> نسخ
-                                </button>
-                                <pre id="frq-prompt-text" class="overflow-x-auto">مهمتك هي تنسيق السؤال التالي كـ "سؤال مقالي" (Free Response) بناءً على القواعد الصارمة التالية:
+[...ضع نص سؤالك الخام هنا مع إجابته...]`,
+                ai_frq_title: '5. برومبت سؤال مقالي (FRQ)',
+                ai_frq_prompt: `مهمتك هي تنسيق السؤال التالي كـ "سؤال مقالي" (Free Response) بناءً على القواعد الصارمة التالية:
 1.  السطر الأول هو نص السؤال.
 2.  السطر الثاني يجب أن يبدأ بعبارة "الجواب النموذجي:" ثم مسافة، ثم الإجابة النموذجية.
 3.  لا تكتب أي شيء إطلاقاً قبل أو بعد النص المنسق.
@@ -665,114 +553,389 @@
 الجواب النموذجي: تلعب التكنولوجيا دوراً محورياً في تطوير التعليم من خلال توفير مصادر متنوعة وسهولة الوصول إليها.
 
 الآن، قم بتطبيق هذه القواعد على السؤال التالي:
-[...ضع نص سؤالك الخام هنا مع إجابته النموذجية...]</pre>
+[...ضع نص سؤالك الخام هنا مع إجابته النموذجية...]`,
+                logic_title: 'اكتمال منطق الكود',
+                logic_p1: 'بعد المراجعة الشاملة، نؤكد أن منطق التحليل المحلي (<code>_parseLocally</code>) في الكود الحالي مكتمل ويغطي جميع الحالات والتنسيقات المذكورة في هذا التقرير بدقة. كل نوع سؤال له معالج مخصص يتعرف على الكلمات المفتاحية والتراكيب الخاصة به، مما يضمن تحويلاً دقيقاً وموثوقاً إلى بنية البيانات الداخلية قبل تصديرها إلى JSON.',
+                logic_quality_title: 'تأكيد الجودة والآلية',
+                logic_quality_desc: 'يعتمد الكود على تحديد نوع السؤال أولاً ثم تطبيق مجموعة قواعد صارمة لاستخراج البيانات. فيما يلي ملخص للتفاصيل الدقيقة لمنطق المعالجة لكل نوع:',
+                logic_mcq_title: '1. الاختيار من متعدد (MCQ):',
+                logic_mcq_desc: 'يتم تحديد السطر الذي يبدأ بـ <code>*</code> كإجابة صحيحة، مع إزالة أي ترقيمات تلقائية من الخيارات.',
+                logic_matching_title: '2. المطابقة (Matching):',
+                logic_matching_desc: 'يتم استخدام الفواصل <code>---</code> لتقسيم النص إلى 3 أقسام (قائمة أ، قائمة ب، الإجابات) ثم يتم تحليل قسم الإجابات لربط الفهارس.',
+                logic_gapped_title: '3. ملء الفراغات (Gapped):',
+                logic_gapped_desc: 'يتم البحث عن علامة الفراغ <code>____</code> في السؤال، ثم البحث عن قسم الإجابات الذي يبدأ بـ <code>الترتيب:</code> أو ما يماثلها لتحديد قيمة كل فراغ.',
+                logic_string_frq_title: '4. إجابة قصيرة (String) ومقالي (FRQ):',
+                logic_string_frq_desc: 'يتم البحث عن الكلمات المفتاحية <code>الجواب:</code> أو <code>الجواب النموذجي:</code>، وكل ما يتبعها يعتبر هو الإجابة.',
+                logic_conclusion: 'هذا المنطق يضمن أن كل جزء من النص المدخل يتم تحليله وتصنيفه بشكل صحيح، مما يؤدي إلى إنشاء ملف JSON دقيق وموثوق.',
+                footer_title: 'محول الأسئلة الذكي',
+                footer_subtitle: 'أداة متقدمة لتحويل الأسئلة إلى تنسيق JSON معياري',
+                footer_copyright: '© 2025 محول الأسئلة الذكي. جميع الحقوق محفوظة.',
+                footer_version: 'الإصدار 3.0 - 23 يوليو 2025'
+            },
+            en: {
+                main_title: 'Smart Question Converter',
+                main_subtitle: 'Tool for converting questions to standard JSON format',
+                version: 'Version: 3.0',
+                release_date: 'July 23, 2025',
+                translate_btn: 'العربية',
+                intro_title: 'Introduction',
+                intro_p1: 'The "Smart Question Converter" application aims to convert question texts written in specific formats into a standard and advanced JSON format, which facilitates the process of archiving and using questions in digital educational systems.',
+                intro_local_title: 'Smart Parsing (Local)',
+                intro_local_desc: 'Fast and direct analysis that relies on predefined rules and formats for each question type, ensuring accurate results without an internet connection.',
+                intro_ai_title: 'AI Enhancement (Optional)',
+                intro_ai_desc: 'Use the Gemini AI API to review and improve the accuracy of the initial analysis when more precision is needed.',
+                rules_title: 'General Input Rules',
+                rule1_title: 'One Question Per Block',
+                rule1_desc: 'Each text block must represent only one question.',
+                rule2_title: 'Separating Questions',
+                rule2_desc: 'To separate one question from another, use a completely empty line or a line containing five or more asterisks (*****).',
+                rule3_title: 'First Line for the Question',
+                rule3_desc: 'Always, the first line of each text block must be the question text (Stem).',
+                rules_note_title: 'Important Note',
+                rules_note_desc: 'Strictly following these rules ensures a perfect conversion of questions to JSON format without errors.',
+                q_types_title: 'Question Types Specifications and Formatting',
+                tab_mcq: 'Multiple Choice',
+                tab_matching: 'Matching',
+                tab_gapped: 'Gapped Text',
+                tab_string: 'Short Answer',
+                tab_frq: 'Free Response',
+                common_desc_title: 'Description:',
+                common_format_title: 'Format:',
+                common_example_title: 'Example:',
+                common_logic_title: 'Code Logic:',
+                common_json_title: 'Resulting JSON:',
+                common_copy_btn: 'Copy',
+                mcq_title: 'Multiple Choice Question (MCQ)',
+                mcq_desc: 'A question consisting of a stem and several options, only one of which is correct.',
+                mcq_format1: 'First line: The question text.',
+                mcq_format2: 'Subsequent lines: Each option on a separate line.',
+                mcq_format3: 'To specify the correct answer: Place an asterisk (*) at the beginning of the correct answer line.',
+                mcq_logic1: 'The code identifies the first line as the question text.',
+                mcq_logic2: 'It processes each subsequent line as an independent option.',
+                mcq_logic3: 'The line starting with <code>*</code> is identified as the correct answer (answer index), and the asterisk is removed from the text.',
+                mcq_logic4: 'The code automatically removes common numbering (like A. or 1)) from the beginning of the options.',
+                mcq_example_text: `What is the capital of Egypt?
+A. Alexandria
+*B. Cairo
+C. Giza`,
+                mcq_json_text: `{
+  "type": "mcq",
+  "stem": "What is the capital of Egypt?",
+  "choices": [
+    "Alexandria",
+    "Cairo",
+    "Giza"
+  ],
+  "answer": 1
+}`,
+                matching_title: 'Matching Question',
+                matching_desc: 'A question that asks the user to match items from two lists.',
+                matching_format1: 'First line: The question text.',
+                matching_format2: 'Use the marker <code>--- List A ---</code> to start the first list.',
+                matching_format3: 'Use the marker <code>--- List B ---</code> to start the second list.',
+                matching_format4: 'Use the marker <code>--- Answers ---</code> to specify the answers.',
+                matching_format5: 'Write each match on a line in the format: <code>item number from A : matching item number from B</code>.',
+                matching_logic1: 'The code uses the markers (<code>---...---</code>) to distribute items into <code>group1</code> and <code>group2</code>.',
+                matching_logic2: 'It reads the answers section to create an <code>answer</code> array containing pairs of matching item indices (starting from 0).',
+                matching_logic3: 'The markers and the answers section do not appear in the final JSON file.',
+                matching_example_text: `Match each country with its capital.
+--- List A ---
+1. Saudi Arabia
+2. UAE
+3. Egypt
+--- List B ---
+1. Cairo
+2. Riyadh
+3. Abu Dhabi
+--- Answers ---
+1 : 2
+2 : 3
+3 : 1`,
+                matching_json_text: `{
+  "type": "matching",
+  "stem": "Match each country with its capital.",
+  "group1": [
+    "Saudi Arabia",
+    "UAE",
+    "Egypt"
+  ],
+  "group2": [
+    "Cairo",
+    "Riyadh",
+    "Abu Dhabi"
+  ],
+  "answer": [
+    [0, 1],
+    [1, 2],
+    [2, 0]
+  ]
+}`,
+                gapped_title: 'Gapped Text Question',
+                gapped_desc: 'A question containing text with one or more blanks to be filled in.',
+                gapped_format1: 'First line: The question text, using <code>____</code> (4 or more underscores) for each blank.',
+                gapped_format2: 'To specify the answers: Use a keyword like <code>Order:</code> or <code>--- Answers ---</code> on a separate line.',
+                gapped_format3: 'In the following lines, write: <code>blank number: correct answer</code>.',
+                gapped_logic1: 'The code recognizes keywords to identify the answers section.',
+                gapped_logic2: 'It reads each line in the answers section to extract the blank number (order) and the answer value.',
+                gapped_logic3: 'It replaces each <code>____</code> in the text with a special HTML tag for blanks.',
+                gapped_logic4: 'The specified answers are used to populate the <code>gap_text_keys</code> field in the JSON file.',
+                gapped_example_text: `Water is composed of ____ and oxygen is ____.
+Order:
+2: a flammable gas
+1: hydrogen`,
+                gapped_json_text: `{
+  "type": "gapped",
+  "stem": "Water is composed of &lt;span&gt; &lt;/span&gt; and oxygen is &lt;span&gt; &lt;/span&gt;.",
+  "gap_text_keys": [
+    { "order": 0, "value": "hydrogen" },
+    { "order": 1, "value": "a flammable gas" }
+  ]
+}`,
+                string_title: 'Short Answer Question (String)',
+                string_desc: 'A question that requires a short, specific answer.',
+                string_format1: 'First line: The question text.',
+                string_format2: 'The next line must start with the word <code>Answer:</code> followed by a space, then the answer.',
+                string_logic1: 'The code looks for the line that starts with <code>Answer:</code>.',
+                string_logic2: 'It extracts all the text that comes after this keyword and considers it the answer.',
+                string_example_text: `Who was the first Caliph in Islam?
+Answer: Abu Bakr Al-Siddiq`,
+                string_json_text: `{
+  "type": "string",
+  "stem": "Who was the first Caliph in Islam?",
+  "answer": "Abu Bakr Al-Siddiq"
+}`,
+                frq_title: 'Free Response Question (FRQ)',
+                frq_desc: 'A question that requires a long, open-ended answer.',
+                frq_format1: 'First line: The question text.',
+                frq_format2: 'The next line must start with the phrase <code>Model Answer:</code> followed by the answer.',
+                frq_format3: 'The answer can span multiple lines.',
+                frq_logic1: 'The code looks for the line that starts with <code>Model Answer:</code>.',
+                frq_logic2: 'It extracts the text on that line and all subsequent lines and considers it the complete answer.',
+                frq_example_text: `Briefly explain the role of technology in modern education.
+Model Answer: Technology plays a pivotal role in advancing education by providing diverse and easily accessible resources, as well as interactive tools that enhance student engagement.`,
+                frq_json_text: `{
+  "type": "frq",
+  "stem": "Briefly explain the role of technology in modern education.",
+  "answer": "Technology plays a pivotal role in advancing education by providing diverse and easily accessible resources, as well as interactive tools that enhance student engagement."
+}`,
+                ai_title: 'AI Prompts for Formatting Questions',
+                ai_desc: 'Use these prompts with any Large Language Model (LLM) to convert your unformatted questions into the precise format required by the "Smart Question Converter".',
+                ai_usage_title: 'How to use:',
+                ai_usage1: 'Choose the appropriate prompt for your question type.',
+                ai_usage2: 'Copy the entire prompt.',
+                ai_usage3: 'Replace the phrase <code>[...Put your raw question text here...]</code> with your actual question.',
+                ai_usage4: 'Send the modified prompt to the language model.',
+                ai_usage5: 'Copy the result from the model and paste it directly into the "Smart Question Converter".',
+                ai_mcq_title: '1. Prompt for Multiple Choice Question (MCQ)',
+                ai_mcq_prompt: `Your task is to format the following question as a "Multiple Choice Question" (MCQ) based on the following strict rules:
+1. The first line must be the question text only.
+2. Each subsequent line must contain only one option.
+3. An asterisk (*) must be placed at the beginning of the correct answer's line only.
+4. Do not add any numbering or letters to the options (e.g., A, B, C).
+5. Do not write anything at all before or after the formatted text.
+
+Example of required output:
+What is the capital of Saudi Arabia?
+Jeddah
+*Riyadh
+Dammam
+
+Now, apply these rules to the following question:
+[...Put your raw question text here, indicating the correct answer in any way...]`,
+                ai_matching_title: '2. Prompt for Matching Question',
+                ai_matching_prompt: `Your task is to format the following question as a "Matching Question" based on the following strict rules:
+1. The first line is the question text.
+2. Use "--- List A ---" as the title for the first list.
+3. Use "--- List B ---" as the title for the second list.
+4. Use "--- Answers ---" as the title for the answers list.
+5. Format the answers as: "item number from A : matching item number from B".
+6. Do not write anything at all before or after the formatted text.
+
+Example of required output:
+Match each country with its capital.
+--- List A ---
+1. Saudi Arabia
+2. UAE
+3. Egypt
+--- List B ---
+1. Cairo
+2. Riyadh
+3. Abu Dhabi
+--- Answers ---
+1 : 2
+2 : 3
+3 : 1
+
+Now, apply these rules to the following question:
+[...Put your raw question text here with its items and answers...]`,
+                ai_gapped_title: '3. Prompt for Gapped Text Question',
+                ai_gapped_prompt: `Your task is to format the following question as a "Gapped Text Question" based on the following strict rules:
+1. The first line is the question text, with "____" (4 underscores) in place of each blank.
+2. Start the answers section with the word "Order:" on a separate line.
+3. In the following lines, specify the answer for each blank with the format "blank number : answer".
+4. Do not write anything at all before or after the formatted text.
+
+Example of required output:
+Water is composed of ____ and oxygen is ____.
+Order:
+2: a flammable gas
+1: hydrogen
+
+Now, apply these rules to the following question:
+[...Put your raw question text here with the answers...]`,
+                ai_string_title: '4. Prompt for Short Answer Question (String)',
+                ai_string_prompt: `Your task is to format the following question as a "Short Answer Question" (String) based on the following strict rules:
+1. The first line is the question text.
+2. The second line must start with the word "Answer:" followed by a space, then the answer.
+3. Do not write anything at all before or after the formatted text.
+
+Example of required output:
+Who was the first Caliph in Islam?
+Answer: Abu Bakr Al-Siddiq
+
+Now, apply these rules to the following question:
+[...Put your raw question text here with its answer...]`,
+                ai_frq_title: '5. Prompt for Free Response Question (FRQ)',
+                ai_frq_prompt: `Your task is to format the following question as a "Free Response Question" (FRQ) based on the following strict rules:
+1. The first line is the question text.
+2. The second line must start with the phrase "Model Answer:" followed by a space, then the model answer.
+3. Do not write anything at all before or after the formatted text.
+
+Example of required output:
+Briefly explain the role of technology in modern education.
+Model Answer: Technology plays a pivotal role in advancing education by providing diverse and easily accessible resources.
+
+Now, apply these rules to the following question:
+[...Put your raw question text here with its model answer...]`,
+                logic_title: 'Code Logic Completion',
+                logic_p1: 'After a comprehensive review, we confirm that the local parsing logic (<code>_parseLocally</code>) in the current code is complete and accurately covers all cases and formats mentioned in this report. Each question type has a dedicated handler that recognizes its specific keywords and structures, ensuring accurate and reliable conversion to the internal data structure before exporting to JSON.',
+                logic_quality_title: 'Quality and Mechanism Confirmation',
+                logic_quality_desc: 'The code relies on first identifying the question type and then applying a set of strict rules to extract the data. Below is a summary of the fine details of the processing logic for each type:',
+                logic_mcq_title: '1. Multiple Choice (MCQ):',
+                logic_mcq_desc: 'The line starting with <code>*</code> is identified as the correct answer, with any automatic numbering removed from the options.',
+                logic_matching_title: '2. Matching:',
+                logic_matching_desc: 'The <code>---</code> separators are used to divide the text into 3 sections (List A, List B, Answers), and the answers section is then parsed to link the indices.',
+                gapped_title: '3. Gapped Text:',
+                gapped_desc: 'The code searches for the blank marker <code>____</code> in the question, then looks for the answers section starting with <code>Order:</code> or similar to determine the value for each blank.',
+                string_frq_title: '4. Short Answer (String) and FRQ:',
+                string_frq_desc: 'The keywords <code>Answer:</code> or <code>Model Answer:</code> are searched for, and everything that follows is considered the answer.',
+                logic_conclusion: 'This logic ensures that every part of the input text is correctly analyzed and classified, leading to the creation of an accurate and reliable JSON file.',
+                footer_title: 'Smart Question Converter',
+                footer_subtitle: 'An advanced tool for converting questions to standard JSON format',
+                footer_copyright: '© 2025 Smart Question Converter. All rights reserved.',
+                footer_version: 'Version 3.0 - July 23, 2025'
+            }
+        };
+
+        const questionTypes = ['mcq', 'matching', 'gapped', 'string', 'frq'];
+        const promptTypes = ['mcq', 'matching', 'gapped', 'string', 'frq'];
+
+        let currentLang = 'ar';
+
+        // --- DYNAMIC CONTENT GENERATION ---
+        function generateQuestionTabContent(type) {
+            return `
+                <h3 class="text-xl font-bold text-indigo-800 mb-4 flex items-center">
+                    <i class="fas ${type === 'mcq' ? 'fa-list-ul' : type === 'matching' ? 'fa-link' : type === 'gapped' ? 'fa-grip-lines' : type === 'string' ? 'fa-align-left' : 'fa-pen-fancy'} mr-2"></i>
+                    <span data-translate-key="${type}_title"></span>
+                </h3>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="font-bold text-gray-700 mb-2" data-translate-key="common_desc_title"></h4>
+                        <p class="mb-4" data-translate-key="${type}_desc"></p>
+                        
+                        <h4 class="font-bold text-gray-700 mb-2" data-translate-key="common_format_title"></h4>
+                        <ul class="list-disc list-inside space-y-2 mb-4 bg-gray-50 p-4 rounded-md">
+                            ${[1,2,3,4,5].map(i => `<li data-translate-key="${type}_format${i}" class="hidden"></li>`).join('')}
+                        </ul>
+                        
+                        <h4 class="font-bold text-gray-700 mb-2" data-translate-key="common_example_title"></h4>
+                        <div class="code-block bg-gray-800 text-gray-100 p-4 rounded-lg relative">
+                            <button class="copy-btn bg-gray-700 text-white px-2 py-1 rounded text-xs" onclick="copyCode(this, '${type}-example-text')">
+                                <i class="fas fa-copy mr-1"></i><span data-translate-key="common_copy_btn"></span>
+                            </button>
+                            <pre id="${type}-example-text" class="overflow-x-auto whitespace-pre-wrap" data-translate-key="${type}_example_text"></pre>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-gray-700 mb-2" data-translate-key="common_logic_title"></h4>
+                        <ul class="list-disc list-inside space-y-2 mb-4">
+                            ${[1,2,3,4].map(i => `<li data-translate-key="${type}_logic${i}" class="hidden"></li>`).join('')}
+                        </ul>
+                        
+                        <div class="mt-6 bg-blue-50 border-l-4 border-blue-400 p-4">
+                            <h4 class="font-bold text-blue-800 mb-2 flex items-center">
+                                <i class="fas fa-code mr-2"></i><span data-translate-key="common_json_title"></span>
+                            </h4>
+                            <div class="code-block bg-gray-800 text-gray-100 p-4 rounded-lg relative">
+                                <button class="copy-btn bg-gray-700 text-white px-2 py-1 rounded text-xs" onclick="copyCode(this, '${type}-json-text')">
+                                    <i class="fas fa-copy mr-1"></i><span data-translate-key="common_copy_btn"></span>
+                                </button>
+                                <pre id="${type}-json-text" class="overflow-x-auto whitespace-pre-wrap" data-translate-key="${type}_json_text"></pre>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            `;
+        }
+        
+        function generateAccordionItem(type, index) {
+            return `
+                <div class="border border-gray-200 rounded-lg overflow-hidden">
+                    <button onclick="togglePrompt('${type}-prompt')" class="w-full flex justify-between items-center text-right p-4 bg-gray-50 hover:bg-gray-100 text-gray-800 font-bold focus:outline-none">
+                        <span data-translate-key="ai_${type}_title"></span>
+                        <i class="fas fa-chevron-down transition-transform duration-300" id="${type}-prompt-icon"></i>
+                    </button>
+                    <div id="${type}-prompt" class="hidden p-4 bg-white border-t border-gray-200">
+                        <div class="code-block bg-gray-800 text-gray-100 p-4 rounded-lg relative">
+                            <button class="copy-btn bg-gray-700 text-white px-2 py-1 rounded text-xs" onclick="copyCode(this, '${type}-prompt-text')">
+                                <i class="fas fa-copy mr-1"></i><span data-translate-key="common_copy_btn"></span>
+                            </button>
+                            <pre id="${type}-prompt-text" class="overflow-x-auto whitespace-pre-wrap" data-translate-key="ai_${type}_prompt"></pre>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
 
-        <!-- Code Logic Section (ENHANCED) -->
-        <section id="code-logic" class="mb-12 bg-white rounded-xl shadow-md overflow-hidden">
-            <div class="bg-gradient-to-r from-red-500 to-red-700 p-6 text-white">
-                <h2 class="text-2xl font-bold flex items-center">
-                    <i class="fas fa-cogs mr-3"></i> اكتمال منطق الكود
-                </h2>
-            </div>
-            <div class="p-6">
-                <p class="mb-6 text-lg leading-relaxed">
-                    بعد المراجعة الشاملة، نؤكد أن منطق التحليل المحلي (<code>_parseLocally</code>) في الكود الحالي مكتمل ويغطي جميع الحالات والتنسيقات المذكورة في هذا التقرير بدقة. كل نوع سؤال له معالج مخصص يتعرف على الكلمات المفتاحية والتراكيب الخاصة به، مما يضمن تحويلاً دقيقاً وموثوقاً إلى بنية البيانات الداخلية قبل تصديرها إلى JSON.
-                </p>
+
+        // --- TRANSLATION AND UI LOGIC ---
+        function setLanguage(lang) {
+            currentLang = lang;
+            document.documentElement.lang = lang;
+            document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+
+            document.querySelectorAll('[data-translate-key]').forEach(el => {
+                const key = el.dataset.translateKey;
+                const translation = translations[lang][key];
                 
-                <div class="bg-red-50 border-l-4 border-red-500 p-4 mb-6 rounded-r-lg">
-                    <div class="flex">
-                        <div class="flex-shrink-0">
-                            <i class="fas fa-check-circle text-red-500 text-xl"></i>
-                        </div>
-                        <div class="mr-3">
-                            <p class="text-red-800 font-bold">تأكيد الجودة والآلية</p>
-                            <p class="text-red-700">يعتمد الكود على تحديد نوع السؤال أولاً ثم تطبيق مجموعة قواعد صارمة لاستخراج البيانات. فيما يلي ملخص للتفاصيل الدقيقة لمنطق المعالجة لكل نوع:</p>
-                        </div>
-                    </div>
-                </div>
+                if (translation) {
+                    if (el.tagName === 'PRE') {
+                        el.textContent = translation;
+                    } else {
+                        el.innerHTML = translation;
+                    }
+                    if (el.classList.contains('hidden')) {
+                        el.classList.remove('hidden');
+                    }
+                } else {
+                     if (el.tagName === 'LI') {
+                        el.classList.add('hidden');
+                     }
+                }
+            });
+        }
 
-                <div class="space-y-4">
-                    <div class="p-4 border border-gray-200 rounded-lg">
-                        <h4 class="font-bold text-gray-800">1. الاختيار من متعدد (MCQ):</h4>
-                        <p class="text-gray-600 mt-1">يتم تحديد السطر الذي يبدأ بـ <code>*</code> كإجابة صحيحة، مع إزالة أي ترقيمات تلقائية من الخيارات.</p>
-                    </div>
-                    <div class="p-4 border border-gray-200 rounded-lg">
-                        <h4 class="font-bold text-gray-800">2. المطابقة (Matching):</h4>
-                        <p class="text-gray-600 mt-1">يتم استخدام الفواصل <code>---</code> لتقسيم النص إلى 3 أقسام (قائمة أ، قائمة ب، الإجابات) ثم يتم تحليل قسم الإجابات لربط الفهارس.</p>
-                    </div>
-                    <div class="p-4 border border-gray-200 rounded-lg">
-                        <h4 class="font-bold text-gray-800">3. ملء الفراغات (Gapped):</h4>
-                        <p class="text-gray-600 mt-1">يتم البحث عن علامة الفراغ <code>____</code> في السؤال، ثم البحث عن قسم الإجابات الذي يبدأ بـ <code>الترتيب:</code> أو ما يماثلها لتحديد قيمة كل فراغ.</p>
-                    </div>
-                    <div class="p-4 border border-gray-200 rounded-lg">
-                        <h4 class="font-bold text-gray-800">4. إجابة قصيرة (String) ومقالي (FRQ):</h4>
-                        <p class="text-gray-600 mt-1">يتم البحث عن الكلمات المفتاحية <code>الجواب:</code> أو <code>الجواب النموذجي:</code>، وكل ما يتبعها يعتبر هو الإجابة.</p>
-                    </div>
-                </div>
-
-                <p class="mt-6 text-gray-700">هذا المنطق يضمن أن كل جزء من النص المدخل يتم تحليله وتصنيفه بشكل صحيح، مما يؤدي إلى إنشاء ملف JSON دقيق وموثوق.</p>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-8">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="mb-4 md:mb-0">
-                    <h3 class="text-xl font-bold flex items-center">
-                        <i class="fas fa-brain mr-2"></i> محول الأسئلة الذكي
-                    </h3>
-                    <p class="text-gray-400 mt-1">أداة متقدمة لتحويل الأسئلة إلى تنسيق JSON معياري</p>
-                </div>
-                <div class="flex space-x-6">
-                    <a href="#" class="text-gray-300 hover:text-white transition-colors">
-                        <i class="fab fa-github text-xl"></i>
-                    </a>
-                    <a href="#" class="text-gray-300 hover:text-white transition-colors">
-                        <i class="fab fa-twitter text-xl"></i>
-                    </a>
-                    <a href="#" class="text-gray-300 hover:text-white transition-colors">
-                        <i class="fas fa-envelope text-xl"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="border-t border-gray-700 mt-6 pt-6 text-center text-gray-400 text-sm">
-                <p>&copy; 2025 محول الأسئلة الذكي. جميع الحقوق محفوظة.</p>
-                <p class="mt-1">الإصدار 3.0 - 23 يوليو 2025</p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Show the first tab by default
-        document.addEventListener('DOMContentLoaded', function() {
-            const firstTabButton = document.querySelector('.nav-item');
-            if (firstTabButton) {
-                showTab('mcq', firstTabButton);
-            }
+        document.getElementById('translate-btn').addEventListener('click', () => {
+            const newLang = currentLang === 'ar' ? 'en' : 'ar';
+            setLanguage(newLang);
         });
 
-        // Tab navigation
         function showTab(tabName, element) {
-            // Hide all tab contents
-            document.querySelectorAll('.tab-content').forEach(tab => {
-                tab.classList.add('hidden');
-            });
-            
-            // Show the selected tab
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.add('hidden'));
             const activeTab = document.getElementById(tabName + '-tab');
-            if(activeTab) {
-                activeTab.classList.remove('hidden');
-            }
+            if(activeTab) activeTab.classList.remove('hidden');
             
-            // Update active tab style
             document.querySelectorAll('.nav-item').forEach(item => {
                 item.classList.remove('active', 'text-blue-600', 'border-blue-600');
                 item.classList.add('text-gray-500', 'border-transparent');
@@ -781,58 +944,53 @@
             element.classList.remove('text-gray-500', 'border-transparent');
         }
 
-        // Toggle prompt visibility (accordion)
         function togglePrompt(promptId) {
             const prompt = document.getElementById(promptId);
             const icon = document.getElementById(promptId + '-icon');
-            
-            if (prompt) {
-                prompt.classList.toggle('hidden');
-            }
-            if (icon) {
-                icon.classList.toggle('rotate-180');
-            }
+            if (prompt) prompt.classList.toggle('hidden');
+            if (icon) icon.classList.toggle('rotate-180');
         }
 
-        // Copy code to clipboard
         function copyCode(button, elementId) {
             const codeElement = document.getElementById(elementId);
             if (!codeElement) return;
 
-            const textToCopy = codeElement.innerText;
+            const textToCopy = codeElement.textContent;
             
             navigator.clipboard.writeText(textToCopy).then(() => {
-                // Success feedback
-                const originalContent = button.innerHTML;
-                button.innerHTML = '<i class="fas fa-check mr-1"></i> تم النسخ';
+                const originalContentHTML = button.innerHTML;
+                const copySuccessText = currentLang === 'ar' ? '<i class="fas fa-check mr-1"></i> تم النسخ' : '<i class="fas fa-check mr-1"></i> Copied';
+                button.innerHTML = copySuccessText;
                 button.classList.add('bg-green-500');
                 setTimeout(() => {
-                    button.innerHTML = originalContent;
+                    button.innerHTML = originalContentHTML;
                     button.classList.remove('bg-green-500');
                 }, 2000);
-            }).catch(err => {
-                // Fallback for older browsers
-                try {
-                    const textArea = document.createElement('textarea');
-                    textArea.value = textToCopy;
-                    document.body.appendChild(textArea);
-                    textArea.select();
-                    document.execCommand('copy');
-                    document.body.removeChild(textArea);
-
-                    // Success feedback
-                    const originalContent = button.innerHTML;
-                    button.innerHTML = '<i class="fas fa-check mr-1"></i> تم النسخ';
-                    button.classList.add('bg-green-500');
-                    setTimeout(() => {
-                        button.innerHTML = originalContent;
-                        button.classList.remove('bg-green-500');
-                    }, 2000);
-                } catch (e) {
-                    console.error('Failed to copy text: ', e);
-                }
-            });
+            }).catch(err => console.error('Failed to copy text: ', err));
         }
+
+        // --- INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', function() {
+            // Generate dynamic content
+            questionTypes.forEach(type => {
+                const tab = document.getElementById(`${type}-tab`);
+                if(tab) tab.innerHTML = generateQuestionTabContent(type);
+            });
+            
+            const accordionContainer = document.getElementById('prompts-accordion');
+            if(accordionContainer) {
+                accordionContainer.innerHTML = promptTypes.map((type, index) => generateAccordionItem(type, index + 1)).join('');
+            }
+
+            // Set initial language
+            setLanguage(currentLang);
+            
+            // Show the first tab by default
+            const firstTabButton = document.querySelector('.nav-item');
+            if (firstTabButton) {
+                showTab('mcq', firstTabButton);
+            }
+        });
     </script>
 </body>
 </html>
